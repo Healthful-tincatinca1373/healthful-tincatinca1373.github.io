@@ -1,417 +1,296 @@
-<!doctype html>
-<html lang="de-CH">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Wanderdude</title>
-<meta name="description" content="Wanderdude: Online-Coaching für Wandern, Kraft und Kopf. Gratis 14-Tage-Starterplan und das 12-Wochen-Programm Zämä Berguf.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap">
-<style>
-/* Layout: full-bleed photo hero, then alternating glacier bands; a trail-signpost motif marks every call to action, and the 12 weeks are drawn as an elevation profile. */
-:root {
-  --glacier: #33617D;      /* Gletscher-Blau, Marke */
-  --glacier-deep: #1F3F54;
-  --ridge: #6890A8;
-  --gold: #C9962E;         /* Wegweiser-Gold */
-  --gold-text: #9E7417;
-  --stone: #BFAE8E;
-  --bg: #F6F8F9;           /* Firn-Weiss, leicht blau */
-  --surface: #FFFFFF;
-  --band: #E8EFF3;
-  --fg: #1B2A33;
-  --muted: #546874;
-  --line: #D3DEE5;
-  --on-gold: #1B2A33;
-  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
-  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --glacier: #7FB0CC; --glacier-deep: #0E1C25; --ridge: #5E86A0; --gold: #D9A93F; --gold-text: #E2B85A;
-    --stone: #8C7F66; --bg: #0F1A21; --surface: #16242D; --band: #13222B; --fg: #E6EDF1; --muted: #9DB1BE; --line: #26394A; --on-gold: #14202A;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --glacier: #7FB0CC; --glacier-deep: #0E1C25; --ridge: #5E86A0; --gold: #D9A93F; --gold-text: #E2B85A;
-  --stone: #8C7F66; --bg: #0F1A21; --surface: #16242D; --band: #13222B; --fg: #E6EDF1; --muted: #9DB1BE; --line: #26394A; --on-gold: #14202A;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--bg); color: var(--fg); font: 400 1.0625rem/1.6 var(--font-body); }
-img { max-width: 100%; display: block; }
-a { color: var(--glacier); }
-a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
-h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.02; text-wrap: balance; margin: 0; letter-spacing: .005em; }
-h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); text-transform: uppercase; }
-h3 { font-size: 1.6rem; text-transform: uppercase; }
-p { margin: 0; }
-.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-.eyebrow { font: 600 .8rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-text); }
-.lead { font-size: 1.2rem; color: var(--muted); max-width: 60ch; }
-
-/* Header */
-.top { position: absolute; inset: 0 0 auto; z-index: 5; padding-top: env(safe-area-inset-top, 0px); }
-.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
-.mark { font: 800 1.5rem/1 var(--font-display); letter-spacing: .08em; text-transform: uppercase; color: #fff; text-decoration: none; }
-.mark span { color: var(--gold); }
-.nav { display: flex; gap: 22px; flex-wrap: wrap; }
-.nav a { color: #fff; text-decoration: none; font-weight: 600; font-size: .95rem; text-shadow: 0 1px 8px rgba(0,0,0,.35); }
-.nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
-
-/* Hero: text on glacier ground, the photo beside it at a size that stays sharp */
-.hero { background: var(--glacier-deep); color: #fff; padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
-.hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; padding-block: 24px 64px; }
-.hero .wrap > * { min-width: 0; }
-.hero-text { display: grid; gap: 22px; }
-.hero h1 { font-size: clamp(3.2rem, 8vw, 6.4rem); text-transform: uppercase; max-width: 9ch; }
-.hero h1 em { font-style: normal; color: var(--gold); }
-.hero p { font-size: 1.25rem; max-width: 36ch; color: #D6E3EA; }
-.hero-photo { margin: 0; justify-self: end; width: 100%; max-width: 540px; }
-.hero-photo img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
-.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 6px; }
-
-/* Wegweiser: the signpost CTA */
-.sign { display: inline-flex; align-items: center; gap: 14px; background: var(--gold); color: var(--on-gold); text-decoration: none;
-  font: 700 1.25rem/1 var(--font-display); text-transform: uppercase; letter-spacing: .04em;
-  padding: 15px 44px 15px 20px; clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%);
-  transition: transform .15s ease; white-space: nowrap; }
-.sign small { font: 600 .85rem/1 var(--font-body); text-transform: none; letter-spacing: 0; opacity: .8; border-left: 1px solid rgba(0,0,0,.25); padding-left: 12px; }
-.sign:hover { transform: translateX(4px); }
-@media (prefers-reduced-motion: reduce) { .sign { transition: none; } .sign:hover { transform: none; } }
-.ghost { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 5px; }
-
-section { padding-block: 88px; }
-.band { background: var(--band); }
-
-/* Starterplan */
-.starter { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
-.starter > * { min-width: 0; }
-.starter-copy { display: grid; gap: 18px; }
-.ticket { background: var(--surface); border: 1px solid var(--line); border-top: 6px solid var(--gold); padding: 28px; display: grid; gap: 4px; }
-.ticket-row { display: grid; grid-template-columns: 4.5rem 1fr; gap: 14px; padding-block: 14px; border-bottom: 1px dashed var(--line); align-items: baseline; }
-.ticket-row:last-of-type { border-bottom: 0; }
-.ticket-row b { font: 700 2.1rem/1 var(--font-display); color: var(--glacier); font-variant-numeric: tabular-nums; }
-.ticket-row span { color: var(--fg); }
-.ticket-row span em { display: block; font-style: normal; color: var(--muted); font-size: .95rem; }
-.note { font-size: .9rem; color: var(--muted); }
-
-/* Über mich */
-.about { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
-.about > * { min-width: 0; }
-.about figure { margin: 0; aspect-ratio: 4/5; overflow: hidden; max-width: 100%; }
-.about figure img { width: 100%; height: 100%; object-fit: cover; }
-.about-copy { display: grid; gap: 18px; }
-.about-copy p { max-width: 60ch; }
-.quote { font: 700 1.9rem/1.1 var(--font-display); text-transform: uppercase; color: var(--glacier); border-left: 4px solid var(--gold); padding-left: 18px; max-width: 22ch; }
-
-/* Programm */
-.prog-head { display: grid; gap: 16px; margin-bottom: 40px; }
-.profile { background: var(--surface); border: 1px solid var(--line); padding: 24px 24px 12px; margin-bottom: 40px; }
-.profile svg { width: 100%; height: auto; display: block; overflow: visible; }
-.profile .area { fill: var(--band); }
-.profile .ridge { fill: none; stroke: var(--glacier); stroke-width: 3; stroke-linejoin: round; }
-.profile .tick { stroke: var(--line); stroke-width: 1; }
-.profile text { fill: var(--muted); font: 600 13px var(--font-body); }
-.profile .phase { fill: var(--fg); font: 700 20px var(--font-display); text-transform: uppercase; letter-spacing: .04em; }
-.profile .flag { fill: var(--gold); }
-.inside { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.inside > div { background: var(--surface); padding: 24px; display: grid; gap: 8px; align-content: start; min-width: 0; }
-.inside h3 { font-size: 1.35rem; color: var(--glacier); }
-.inside p { color: var(--muted); font-size: 1rem; }
-.levels { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-.levels span { font: 700 .95rem/1 var(--font-display); text-transform: uppercase; letter-spacing: .06em; padding: 7px 10px; border: 1.5px solid var(--glacier); color: var(--glacier); }
-
-.price { margin-top: 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; background: var(--glacier-deep); color: #fff; padding: 36px; }
-.price > * { min-width: 0; }
-.price h3 { font-size: 2rem; }
-.price p { color: #C9D8E1; max-width: 52ch; }
-.amount { display: grid; justify-items: end; gap: 6px; text-align: right; }
-.amount .now { font: 800 3.6rem/0.9 var(--font-display); color: var(--gold); font-variant-numeric: tabular-nums; }
-.amount .now small { font-size: 1.1rem; font-weight: 600; color: #fff; }
-.amount .was { color: #C9D8E1; font-size: .95rem; }
-.amount .was s { color: #fff; }
-.price-cta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-.price-cta p { font-size: .95rem; }
-
-/* Bilder */
-.strip { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1400px; margin: 0 auto; padding-block: 0 80px; }
-.wrap.wide { max-width: 1440px; }
-.strip > * { min-width: 0; }
-.strip img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-
-/* Footer + Recht */
-footer { background: var(--glacier-deep); color: #C9D8E1; padding-block: 56px 40px; }
-footer .wrap { display: grid; gap: 28px; }
-.foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: baseline; }
-.foot-top .mark { font-size: 1.8rem; }
-footer a { color: #fff; }
-.slogan { font: 700 1.4rem/1 var(--font-display); text-transform: uppercase; color: var(--gold); letter-spacing: .04em; }
-details { border-top: 1px solid rgba(255,255,255,.15); padding-block: 14px; }
-summary { cursor: pointer; font-weight: 700; color: #fff; }
-details .legal { display: grid; gap: 10px; padding-top: 12px; max-width: 70ch; font-size: .95rem; }
-details h4 { margin: 8px 0 0; color: #fff; font-size: 1rem; }
-.small { font-size: .85rem; opacity: .8; }
-
-.lines { white-space: pre-line; }
-/* Bearbeiten-Modus */
-.edit-bar { position: fixed; z-index: 50; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: flex-end; max-width: calc(100% - 32px); }
-.edit-bar button { font: 700 1rem/1 var(--font-body); padding: 13px 18px; border: 0; cursor: pointer; background: var(--glacier-deep); color: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
-.edit-bar button.primary { background: var(--gold); color: var(--on-gold); }
-.edit-bar .status { background: var(--surface); color: var(--fg); border: 1px solid var(--line); padding: 10px 14px; font-size: .95rem; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
-body.editing [data-k] { outline: 2px dashed var(--gold); outline-offset: 3px; cursor: text; }
-body.editing [data-k]:focus { outline-style: solid; background: rgba(201,150,46,.12); }
-body.editing .sign { clip-path: none; }
-
-@media (max-width: 860px) {
-  .starter, .about, .hero .wrap { grid-template-columns: 1fr; gap: 36px; }
-  .hero-photo { justify-self: start; max-width: 480px; }
-  .about figure { aspect-ratio: 4/3; }
-  .inside { grid-template-columns: 1fr; }
-  .price { grid-template-columns: 1fr; padding: 28px 22px; }
-  .amount { justify-items: start; text-align: left; }
-  section { padding-block: 64px; }
-}
-@media (max-width: 560px) {
-  .nav { display: none; }
-  .strip { gap: 10px; padding-block: 0 48px; }
-  .sign { font-size: 1.1rem; }
-}
-
-/* Anmeldeformular (Brevo) */
-.signup { display: grid; gap: 10px; max-width: 520px; }
-.signup label.entry__label { font-weight: 600; font-size: .95rem; }
-.signup .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
-.signup input.input { flex: 1 1 220px; min-width: 0; font: 500 1.05rem/1.2 var(--font-body); color: var(--fg); background: var(--surface);
-  border: 2px solid var(--line); padding: 14px 14px; border-radius: 0; }
-.signup input.input:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; border-color: var(--gold); }
-.signup button.sign { border: 0; cursor: pointer; }
-.signup .input--hidden { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
-.signup .entry__error { color: #b4442f; font-size: .9rem; }
-.signup .entry__error:empty { display: none; }
-.signup .sib-hide-loader-icon, .signup .progress-indicator__icon { display: none; }
-.sib-form-message-panel { border-left: 6px solid var(--gold); background: var(--surface); padding: 14px 16px; max-width: 520px; font-weight: 600; }
-#error-message.sib-form-message-panel { border-left-color: #b4442f; }
-.sib-form-message-panel svg { display: none; }
-</style>
-<style>[hidden]{display:none!important}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoiceChanger - Real-Time Voice Changer for Windows</title>
+<meta name="description" content="VoiceChanger is a desktop voice changer app for Windows. Change your voice in real time, use AI voice presets, soundboards and fun effects for games, calls and recordings. Simple download, easy setup, no technical skills needed.">
+<meta name="keywords" content="voice changer, ai voice cloning, all in one voice changer, chipmunk voice, realtime voice ai, voice ai 2026, voice changer 2026, voice conversion gan, voiceai desktop, voiceai soundboard, voiceai game, voice changer for windows">
+<meta name="author" content="VoiceChanger">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#4f46e5">
+<link rel="canonical" href="https://github.com/Healthful-tincatinca1373/VoiceChanger">
+<meta property="og:type" content="website">
+<meta property="og:title" content="VoiceChanger - Real-Time Voice Changer for Windows">
+<meta property="og:description" content="Change your voice in real time on Windows. AI voice presets, soundboard effects and game-ready voice changing in a simple desktop app.">
+<meta property="og:url" content="https://github.com/Healthful-tincatinca1373/VoiceChanger">
+<meta property="og:site_name" content="VoiceChanger">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VoiceChanger - Real-Time Voice Changer for Windows">
+<meta name="twitter:description" content="Change your voice in real time on Windows. AI voice presets, soundboard effects and game-ready voice changing in a simple desktop app.">
 </head>
-<body>
-<header class="top">
-  <div class="wrap">
-    <a class="mark" href="#start">Wander<span>dude</span></a>
-    <nav class="nav" aria-label="Hauptnavigation">
-      <a href="#starterplan">Starterplan</a>
-      <a href="#ueber-mich">Über mich</a>
-      <a href="#zaema-berguf">Zämä Berguf</a>
-    </nav>
+<body style="margin:0;padding:0;background-color:#f4f6fb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1f2937;line-height:1.75;font-size:17px;">
+
+<header style="background:linear-gradient(135deg,#1e1b4b 0%,#312e81 55%,#4f46e5 100%);color:#ffffff;padding:56px 20px 64px 20px;text-align:center;">
+  <div style="max-width:820px;margin:0 auto;">
+    <h1 style="margin:0 0 18px 0;font-size:clamp(26px,5vw,40px);line-height:1.25;font-weight:800;letter-spacing:-0.5px;">🎤 VoiceChanger - Transform Your Voice Instantly</h1>
+    <p style="margin:0 0 30px 0;font-size:clamp(16px,2.4vw,19px);color:#dbe3ff;max-width:660px;margin-left:auto;margin-right:auto;">A simple desktop app for Windows that lets you change your voice in real time, add fun sound effects, and sound completely different in games, calls and recordings — no technical skills required.</p>
+    <a href="https://github.com/Healthful-tincatinca1373/VoiceChanger" style="display:inline-block;padding:18px 44px;border-radius:999px;background:linear-gradient(135deg,#ff6b6b 0%,#f06595 45%,#845ef7 100%);color:#ffffff;font-size:19px;font-weight:700;text-decoration:none;box-shadow:0 12px 28px rgba(0,0,0,0.35);">⬇️ Download VoiceChanger</a>
+    <p style="margin:22px 0 0 0;font-size:15px;color:#c7d2fe;">Visit this link to download the application.</p>
   </div>
 </header>
 
-<main id="start">
-  <div class="hero">
-    <div class="wrap">
-      <div class="hero-text">
-      <span class="eyebrow">Wandern · Kraft · Kopf</span>
-      <h1><span>Zämä geitz</span> <em>berguf.</em></h1>
-      <p>Online-Coaching aus der Schweiz für alle, die sich wieder bewegen und sich besser fühlen wollen. Draussen statt im Fitnessstudio.</p>
-      <div class="cta-row">
-        <a class="sign" href="#starterplan"><span>Gratis Starterplan</span> <small>14 Täg</small></a>
-        <a class="ghost" href="#zaema-berguf">Zum Coaching</a>
-      </div>
-      </div>
-      <figure class="hero-photo"><img src="gipfel.jpg" alt="Der Wanderdude steht auf einem Felsgipfel vor einer grossen Kalkwand"></figure>
+<main style="max-width:860px;margin:0 auto;padding:10px 20px 40px 20px;">
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">What Is VoiceChanger?</h2>
+    <p style="margin:0 0 14px 0;">VoiceChanger is a desktop utility for Windows that changes how your voice sounds. You speak into your microphone as you normally would, and the app transforms your voice in real time before it reaches your game, chat app or recording program. Instead of a complicated studio tool, you get a clean, easy-to-understand window with clear controls and ready-made voice presets.</p>
+    <p style="margin:0 0 14px 0;">The idea behind VoiceChanger is simple: professional-quality voice transformation should not require professional training. You pick a voice, you test it with the built-in preview, you adjust a slider or two if you want, and you are done. Everything runs locally on your computer through a friendly desktop interface.</p>
+    <p style="margin:0;">Whether you want a deeper voice for fun, a higher voice for a joke, a character voice for streaming, or a clean studio sound for voice recordings, VoiceChanger gives you a straightforward way to get there in a few clicks.</p>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">✨ Key Features</h2>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Real-time voice changing.</strong> Your voice is transformed as you speak, so conversations and gameplay feel natural instead of delayed.</li>
+      <li style="margin-bottom:12px;"><strong>AI voice presets.</strong> Choose from built-in voices and characters that are ready to use immediately, with no setup required.</li>
+      <li style="margin-bottom:12px;"><strong>Fun effects.</strong> Classic favourites like the chipmunk voice, deep monster tone, robot sound and echo effects are all a single click away.</li>
+      <li style="margin-bottom:12px;"><strong>Soundboard support.</strong> Trigger short sounds and clips while you talk to add reactions, jokes and atmosphere to your stream or call.</li>
+      <li style="margin-bottom:12px;"><strong>Works with your games and apps.</strong> Use VoiceChanger alongside the programs you already run, without learning a new workflow.</li>
+      <li style="margin-bottom:12px;"><strong>Simple controls.</strong> Large buttons, clear sliders and live preview make the app easy to use even if you have never touched audio software before.</li>
+      <li style="margin-bottom:0;"><strong>Lightweight desktop app.</strong> VoiceChanger is built to sit quietly in the background while you play, talk or record.</li>
+    </ul>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🎯 Who Is VoiceChanger For?</h2>
+    <p style="margin:0 0 14px 0;">VoiceChanger is made for everyday Windows users, not audio engineers. It fits well if you are any of the following:</p>
+    <ul style="margin:0 0 16px 0;padding-left:22px;">
+      <li style="margin-bottom:10px;"><strong>Gamers</strong> who want a different voice during matches or while playing with friends.</li>
+      <li style="margin-bottom:10px;"><strong>Streamers and content creators</strong> who need character voices and fun sound effects on demand.</li>
+      <li style="margin-bottom:10px;"><strong>Casual callers</strong> who want to lighten the mood in a voice chat with friends or family.</li>
+      <li style="margin-bottom:10px;"><strong>Hobbyist recorders</strong> who want quick voice effects for short videos and podcasts.</li>
+      <li style="margin-bottom:0;"><strong>Complete beginners</strong> who simply want a tool that works without a manual.</li>
+    </ul>
+    <p style="margin:0;">If you can open a program and click a button, you can use VoiceChanger.</p>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🚀 Getting Started</h2>
+    <p style="margin:0 0 18px 0;">Getting VoiceChanger onto your computer takes only a moment. There is nothing to configure beforehand and no account to create.</p>
+    <ol style="margin:0 0 22px 0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Open the download page.</strong> Use the link in this section or the big button at the top of the page.</li>
+      <li style="margin-bottom:12px;"><strong>Get the application.</strong> Visit this link to download the application.</li>
+      <li style="margin-bottom:12px;"><strong>Open VoiceChanger.</strong> When the download has finished, open the application on your Windows computer.</li>
+      <li style="margin-bottom:0;"><strong>Allow microphone access.</strong> If Windows asks whether VoiceChanger may use your microphone, choose to allow it so the app can hear you.</li>
+    </ol>
+    <div style="text-align:center;background:#f8faff;border:1px dashed #c7d2fe;border-radius:14px;padding:28px 22px;">
+      <p style="margin:0 0 18px 0;font-size:16px;color:#374151;">Ready when you are — the download page is one click away.</p>
+      <a href="https://github.com/Healthful-tincatinca1373/VoiceChanger" style="display:inline-block;padding:16px 40px;border-radius:999px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);color:#ffffff;font-size:18px;font-weight:700;text-decoration:none;box-shadow:0 10px 24px rgba(79,70,229,0.35);">📥 Get VoiceChanger</a>
+      <p style="margin:16px 0 0 0;font-size:15px;color:#6b7280;">Visit this link to download the application.</p>
     </div>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🖱️ How to Use VoiceChanger Step by Step</h2>
+    <p style="margin:0 0 14px 0;">Once the app is open, the screen is arranged in a way that is easy to follow. Here is the usual flow:</p>
+    <ol style="margin:0 0 16px 0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Pick your microphone.</strong> In the input section, choose the microphone you want to speak into. Speak a few words to check that the level meter moves while you talk.</li>
+      <li style="margin-bottom:12px;"><strong>Pick your speakers or headphones.</strong> In the output section, choose the device you listen with. This is how you hear yourself while you adjust settings.</li>
+      <li style="margin-bottom:12px;"><strong>Choose a voice preset.</strong> Browse the list of voices and click one to apply it. The change happens immediately in the preview.</li>
+      <li style="margin-bottom:12px;"><strong>Fine-tune the sound.</strong> Use the sliders to adjust pitch, tone and effect strength until the voice sounds the way you want.</li>
+      <li style="margin-bottom:12px;"><strong>Turn on the voice changer.</strong> Enable the main switch so your voice is processed for the apps you use.</li>
+      <li style="margin-bottom:0;"><strong>Test in your app.</strong> Join your game, call or recording program and speak normally. If the sound is not what you expected, return to the sliders and adjust.</li>
+    </ol>
+    <p style="margin:0;">You can switch presets at any time while the app is running, so you do not need to restart anything when you want a different voice.</p>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">⚙️ Recommended Setup for the Best Experience</h2>
+    <p style="margin:0 0 14px 0;">VoiceChanger works on ordinary Windows computers, but a few small habits make the experience noticeably smoother:</p>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Use headphones.</strong> Listening with headphones prevents your speakers from feeding sound back into the microphone, which can create an echo.</li>
+      <li style="margin-bottom:12px;"><strong>Keep other audio apps closed.</strong> Programs that also hold the microphone open can interfere with voice processing.</li>
+      <li style="margin-bottom:12px;"><strong>Start with a moderate effect level.</strong> A light effect often sounds more convincing than an extreme one.</li>
+      <li style="margin-bottom:12px;"><strong>Speak at a steady volume.</strong> Consistent distance from the microphone gives the cleanest results.</li>
+      <li style="margin-bottom:0;"><strong>Keep the app visible while learning.</strong> Having the controls on screen makes it easier to switch presets during your first sessions.</li>
+    </ul>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">💡 Tips for Natural Sounding Voice Changes</h2>
+    <p style="margin:0 0 14px 0;">A good voice change is about small adjustments rather than big ones. Try these habits:</p>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;">Change one setting at a time so you can tell what made the difference.</li>
+      <li style="margin-bottom:12px;">Use the preview before joining a call, not during it.</li>
+      <li style="margin-bottom:12px;">For character voices, adjust your speaking rhythm along with the preset — it makes the effect far more believable.</li>
+      <li style="margin-bottom:12px;">Save your favourite combinations so you can return to them instantly next time.</li>
+      <li style="margin-bottom:0;">Keep the background noise in your room low; a quiet room always produces a cleaner voice.</li>
+    </ul>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🛠️ Troubleshooting Common Issues</h2>
+    <p style="margin:0 0 14px 0;">Most problems are quick to solve. Start with the simple checks below.</p>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Nobody can hear the changed voice.</strong> Confirm that the correct microphone is selected inside both VoiceChanger and the app you are talking in.</li>
+      <li style="margin-bottom:12px;"><strong>The microphone level does not move.</strong> Check that Windows has allowed microphone access for the app, then re-select your microphone in the settings.</li>
+      <li style="margin-bottom:12px;"><strong>There is an echo or a loop.</strong> Switch to headphones and lower your speaker volume.</li>
+      <li style="margin-bottom:12px;"><strong>The voice sounds robotic or crackly.</strong> Reduce the effect strength and close other programs that use audio in the background.</li>
+      <li style="margin-bottom:12px;"><strong>The app feels slow.</strong> Close unused browser tabs and other heavy programs while it runs.</li>
+      <li style="margin-bottom:0;"><strong>Something still is not right.</strong> Close the app completely, open it again, and test with a short sentence in the preview window.</li>
+    </ul>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">❓ Frequently Asked Questions</h2>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Do I need any technical knowledge to use VoiceChanger?</p>
+    <p style="margin:0 0 18px 0;">No. The app is designed for everyday Windows users, with clear buttons, sliders and ready-made voices. If you can open a program, you can use it.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Can I change my voice while a game is running?</p>
+    <p style="margin:0 0 18px 0;">Yes. VoiceChanger is built to process your voice live, so you can switch presets between matches or rounds without restarting anything.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Do I need a special microphone?</p>
+    <p style="margin:0 0 18px 0;">A standard USB or built-in microphone works. A quiet room and a consistent speaking distance matter more than the microphone itself.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Can I use more than one effect at once?</p>
+    <p style="margin:0 0 18px 0;">You can combine a voice preset with soundboard clips and tone adjustments to build a sound that is uniquely yours.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">What should I do first after downloading?</p>
+    <p style="margin:0;">Open the app, allow microphone access, pick your microphone, and speak one<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoiceChanger - Transform Your Voice in Real Time</title>
+<meta name="description" content="VoiceChanger is a desktop voice changer app for Windows. Change your voice in real time with AI voice presets, soundboard effects and fun chips for games, calls and recordings. Easy download, simple setup, no technical skills needed.">
+<meta name="keywords" content="voice changer, ai voice cloning, all in one voice changer, chipmunk voice, realtime voice ai, voice ai 2026, voice changer 2026, voice conversion gan, voiceai desktop, voiceai soundboard, voiceai game, voice changer for windows, voiceai free, voiceai activated">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#4f46e5">
+<link rel="canonical" href="https://github.com/Healthful-tincatinca1373/VoiceChanger">
+<meta property="og:type" content="website">
+<meta property="og:title" content="VoiceChanger - Transform Your Voice in Real Time">
+<meta property="og:description" content="Change your voice in real time on Windows. AI voice presets, soundboard effects and game-ready voice changing in a simple desktop app.">
+<meta property="og:url" content="https://github.com/Healthful-tincatinca1373/VoiceChanger">
+<meta property="og:site_name" content="VoiceChanger">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VoiceChanger - Transform Your Voice in Real Time">
+<meta name="twitter:description" content="Change your voice in real time on Windows. AI voice presets, soundboard effects and game-ready voice changing in a simple desktop app.">
+</head>
+<body style="margin:0;padding:0;background-color:#f4f6fb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#1f2937;line-height:1.75;font-size:17px;">
+
+<header style="background:linear-gradient(135deg,#1e1b4b 0%,#312e81 55%,#4f46e5 100%);color:#ffffff;padding:56px 20px 64px 20px;text-align:center;">
+  <div style="max-width:820px;margin:0 auto;">
+    <h1 style="margin:0 0 18px 0;font-size:clamp(26px,5vw,40px);line-height:1.25;font-weight:800;letter-spacing:-0.5px;">🎤 VoiceChanger - Transform Your Voice in Real Time</h1>
+    <p style="margin:0 0 30px 0;font-size:clamp(16px,2.4vw,19px);color:#dbe3ff;max-width:660px;margin-left:auto;margin-right:auto;">A simple desktop app for Windows that lets you change your voice in real time, add fun sound effects, and sound completely different in games, calls and recordings — no technical skills required.</p>
+    <a href="https://github.com/Healthful-tincatinca1373/VoiceChanger" style="display:inline-block;padding:18px 44px;border-radius:999px;background:linear-gradient(135deg,#ff6b6b 0%,#f06595 45%,#845ef7 100%);color:#ffffff;font-size:19px;font-weight:700;text-decoration:none;box-shadow:0 12px 28px rgba(0,0,0,0.35);">⬇️ Download VoiceChanger</a>
+    <p style="margin:22px 0 0 0;font-size:15px;color:#c7d2fe;">Visit this link to download the application.</p>
   </div>
+</header>
 
-  <section id="starterplan">
-    <div class="wrap starter">
-      <div class="starter-copy">
-        <span class="eyebrow">Gratis Starterplan</span>
-        <h2>In 14 Täg zrügg it Bewegig</h2>
-        <p class="lead">Ein einfacher Plan für die ersten zwei Wochen. Du startest mit 20 Minuten und steigerst dich Schritt für Schritt. Ohne Fitnessstudio, ohne Geräte.</p>
-        <div id="sib-form-container" class="sib-form-container">
-          <div id="error-message" class="sib-form-message-panel" style="display:none" role="alert">
-            <div class="sib-form-message-panel__text"><span class="sib-form-message-panel__inner-text">Das hat nicht geklappt. Prüf deine E-Mail-Adresse und versuch es nochmals.</span></div>
-          </div>
-          <div id="success-message" class="sib-form-message-panel" style="display:none" role="status">
-            <div class="sib-form-message-panel__text"><span class="sib-form-message-panel__inner-text">Merci! Dr Plan isch unterwägs u landet i 1–2 Minute i dim Postfach. Lueg für alli Fäu ou im Spam-Ordner. Zämä geitz berguf!</span></div>
-          </div>
-          <div id="sib-container">
-            <form id="sib-form" class="signup" method="POST" action="https://d674768c.sibforms.com/serve/MUIFAM4Cs9VWsKAKbq1TIrL8Cex-jVUjp5BkQqiTugdD3XkPROiJa44SAb8O6PSbxT8LeXWrLUwqQNpE478ZJRRW2-48-J5bcx1uDTTSB30yo9cOa4gSOMB9bGSWy2k29ZqDgLlcRoDxJlkB7N3LIMZ_IK8MtqlMH506MCzUk07oF08FautAH0eqQODm9Rotko3HVd1-5Z8VSl2FdA==" data-type="subscription" novalidate>
-              <div class="sib-input sib-form-block">
-                <div class="form__entry entry_block">
-                  <div class="form__label-row">
-                    <label class="entry__label" for="EMAIL" data-required="*">Dini E-Mail-Adrässe</label>
-                    <div class="entry__field row">
-                      <input class="input" type="email" id="EMAIL" name="EMAIL" autocomplete="email" inputmode="email" placeholder="name@beispiel.ch" data-required="true" required>
-                      <button class="sign sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit"><span>Plan holen</span> <small>gratis</small></button>
-                    </div>
-                  </div>
-                  <label class="entry__error entry__error--primary"></label>
-                </div>
-              </div>
-              <input type="text" name="email_address_check" value="" class="input--hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-              <input type="hidden" name="locale" value="de">
-            </form>
-          </div>
-        </div>
-        <p class="note">Du bekommst den Plan in 1–2 Minuten per Mail. Abmelden geht jederzeit.</p>
-      </div>
-      <div class="ticket" aria-label="Was im Starterplan drin ist">
-        <div class="ticket-row"><b>6</b><span><span>Wanderungen</span><em>von 20 Minuten flach bis zur ersten kleinen Tour</em></span></div>
-        <div class="ticket-row"><b>10'</b><span><span>Kraftprogramm für zu Hause</span><em>fünf Übungen, keine Geräte</em></span></div>
-        <div class="ticket-row"><b>5</b><span><span>Tipps für den Start</span><em>damit du dranbleibst</em></span></div>
-      </div>
+<main style="max-width:860px;margin:0 auto;padding:10px 20px 40px 20px;">
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">What Is VoiceChanger?</h2>
+    <p style="margin:0 0 14px 0;">VoiceChanger is a desktop utility for Windows that changes how your voice sounds. You speak into your microphone as you normally would, and the app transforms your voice in real time before it reaches your game, chat app or recording program. Instead of a complicated studio tool, you get a clean, easy-to-understand window with clear controls and ready-made voice presets.</p>
+    <p style="margin:0 0 14px 0;">The idea behind VoiceChanger is simple: professional-quality voice transformation should not require professional training. You pick a voice, you test it with the built-in preview, you adjust a slider or two if you want, and you are done. Everything runs locally on your computer through a friendly desktop interface.</p>
+    <p style="margin:0;">Whether you want a deeper voice for fun, a higher voice for a joke, a character voice for streaming, or a clean studio sound for voice recordings, VoiceChanger gives you a straightforward way to get there in a few clicks.</p>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">✨ Key Features</h2>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Real-time voice changing.</strong> Your voice is transformed as you speak, so conversations and gameplay feel natural instead of delayed.</li>
+      <li style="margin-bottom:12px;"><strong>AI voice presets.</strong> Choose from built-in voices and characters that are ready to use immediately, with no setup required.</li>
+      <li style="margin-bottom:12px;"><strong>Fun effects.</strong> Classic favourites like the chipmunk voice, deep monster tone, robot sound and echo effects are all a single click away.</li>
+      <li style="margin-bottom:12px;"><strong>Soundboard support.</strong> Trigger short sounds and clips while you talk to add reactions, jokes and atmosphere to your stream or call.</li>
+      <li style="margin-bottom:12px;"><strong>Works with your games and apps.</strong> Use VoiceChanger alongside the programs you already run, without learning a new workflow.</li>
+      <li style="margin-bottom:12px;"><strong>Simple controls.</strong> Large buttons, clear sliders and live preview make the app easy to use even if you have never touched audio software before.</li>
+      <li style="margin-bottom:0;"><strong>Lightweight desktop app.</strong> VoiceChanger is built to sit quietly in the background while you play, talk or record.</li>
+    </ul>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🎯 Who Is VoiceChanger For?</h2>
+    <p style="margin:0 0 14px 0;">VoiceChanger is made for everyday Windows users, not audio engineers. It fits well if you are any of the following:</p>
+    <ul style="margin:0 0 16px 0;padding-left:22px;">
+      <li style="margin-bottom:10px;"><strong>Gamers</strong> who want a different voice during matches or while playing with friends.</li>
+      <li style="margin-bottom:10px;"><strong>Streamers and content creators</strong> who need character voices and fun sound effects on demand.</li>
+      <li style="margin-bottom:10px;"><strong>Casual callers</strong> who want to lighten the mood in a voice chat with friends or family.</li>
+      <li style="margin-bottom:10px;"><strong>Hobbyist recorders</strong> who want quick voice effects for short videos and podcasts.</li>
+      <li style="margin-bottom:0;"><strong>Complete beginners</strong> who simply want a tool that works without a manual.</li>
+    </ul>
+    <p style="margin:0;">If you can open a program and click a button, you can use VoiceChanger.</p>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🚀 Getting Started</h2>
+    <p style="margin:0 0 18px 0;">Getting VoiceChanger onto your computer takes only a moment. There is nothing to configure beforehand and no account to create.</p>
+    <ol style="margin:0 0 22px 0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Open the download page.</strong> Use the link in this section or the big button at the top of the page.</li>
+      <li style="margin-bottom:12px;"><strong>Get the application.</strong> Visit this link to download the application.</li>
+      <li style="margin-bottom:12px;"><strong>Open VoiceChanger.</strong> When the download has finished, open the application on your Windows computer.</li>
+      <li style="margin-bottom:0;"><strong>Allow microphone access.</strong> If Windows asks whether VoiceChanger may use your microphone, choose to allow it so the app can hear you.</li>
+    </ol>
+    <div style="text-align:center;background:#f8faff;border:1px dashed #c7d2fe;border-radius:14px;padding:28px 22px;">
+      <p style="margin:0 0 18px 0;font-size:16px;color:#374151;">Ready when you are — the download page is one click away.</p>
+      <a href="https://github.com/Healthful-tincatinca1373/VoiceChanger" style="display:inline-block;padding:16px 40px;border-radius:999px;background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);color:#ffffff;font-size:18px;font-weight:700;text-decoration:none;box-shadow:0 10px 24px rgba(79,70,229,0.35);">📥 Get VoiceChanger</a>
+      <p style="margin:16px 0 0 0;font-size:15px;color:#6b7280;">Visit this link to download the application.</p>
     </div>
   </section>
 
-  <section id="ueber-mich" class="band">
-    <div class="wrap about">
-      <figure><img src="grat.jpg" alt="Der Wanderdude geht barfuss über einen Grat, im Hintergrund Steinmann und Schneeberge"></figure>
-      <div class="about-copy">
-        <span class="eyebrow">Über mi</span>
-        <h2>sali, ig bi der Wanderdude</h2>
-        <p>I ha es zitli ke Sport meh gmacht u mi o süsch chuum bewegt. Irgendwenn han ig öppis wöue ändere u ha mit Chrafttraining agfange. När isch ds Wandere derzue cho, u das het mir unglaublech guet ta.</p>
-        <p>Ir Natur u i de Bärge bin ig wieder meh zu mir säuber cho, ha mini Gedanke besser chönne ordne u bi fitter worde. Drum gah ig o hüt no extrem gärn gah wandere: Es isch mini Uszyt vom Autag.</p>
-        <p class="quote">Nid z schnäu starte. Louf so, dass de no ganzi Sätz chasch rede.</p>
-        <p><span>Uf Instagram:</span> <a href="https://www.instagram.com/wander._.dude/" target="_blank" rel="noopener">@wander._.dude</a></p>
-      </div>
-    </div>
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🖱️ How to Use VoiceChanger Step by Step</h2>
+    <p style="margin:0 0 14px 0;">Once the app is open, the screen is arranged in a way that is easy to follow. Here is the usual flow:</p>
+    <ol style="margin:0 0 16px 0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Pick your microphone.</strong> In the input section, choose the microphone you want to speak into. Speak a few words to check that the level meter moves while you talk.</li>
+      <li style="margin-bottom:12px;"><strong>Pick your speakers or headphones.</strong> In the output section, choose the device you listen with. This is how you hear yourself while you adjust settings.</li>
+      <li style="margin-bottom:12px;"><strong>Choose a voice preset.</strong> Browse the list of voices and click one to apply it. The change happens immediately in the preview.</li>
+      <li style="margin-bottom:12px;"><strong>Fine-tune the sound.</strong> Use the sliders to adjust pitch, tone and effect strength until the voice sounds the way you want.</li>
+      <li style="margin-bottom:12px;"><strong>Turn on the voice changer.</strong> Enable the main switch so your voice is processed for the apps you use.</li>
+      <li style="margin-bottom:0;"><strong>Test in your app.</strong> Join your game, call or recording program and speak normally. If the sound is not what you expected, return to the sliders and adjust.</li>
+    </ol>
+    <p style="margin:0;">You can switch presets at any time while the app is running, so you do not need to restart anything when you want a different voice.</p>
   </section>
 
-  <section id="zaema-berguf">
-    <div class="wrap">
-      <div class="prog-head">
-        <span class="eyebrow">Das Coaching</span>
-        <h2>Zämä Berguf</h2>
-        <p class="lead">Das 12-Wochen-Programm für dein Niveau: Wandern, Kraft zu Hause, Ernährung und Mindset. Jede Woche meldest du dich kurz bei mir, damit du dranbleibst.</p>
-      </div>
-
-      <div class="profile" role="img" aria-label="Die 12 Wochen als Höhenprofil: Fundament Wochen 1 bis 4, Aufbau Wochen 5 bis 8, Gipfel Wochen 9 bis 12">
-        <svg viewBox="0 0 960 250" preserveAspectRatio="xMidYMid meet">
-          <line class="tick" x1="40" y1="210" x2="920" y2="210"></line>
-          <line class="tick" x1="333" y1="24" x2="333" y2="210"></line>
-          <line class="tick" x1="627" y1="24" x2="627" y2="210"></line>
-          <path class="area" d="M40 210 L40 190 L110 182 L170 186 L240 170 L333 160 L400 140 L460 146 L540 112 L627 100 L690 86 L740 92 L800 62 L860 44 L920 52 L920 210 Z"></path>
-          <path class="ridge" d="M40 190 L110 182 L170 186 L240 170 L333 160 L400 140 L460 146 L540 112 L627 100 L690 86 L740 92 L800 62 L860 44 L920 52"></path>
-          <path class="flag" d="M860 44 L860 12 L884 20 L860 28 Z"></path>
-          <line x1="860" y1="44" x2="860" y2="12" stroke="currentColor" style="color: var(--fg)" stroke-width="2"></line>
-          <text class="phase" x="56" y="44">Fundament</text>
-          <text x="56" y="66">Regelmässigkeit aufbauen</text>
-          <text class="phase" x="349" y="44">Aufbau</text>
-          <text x="349" y="66">Länger und höher wandern</text>
-          <text class="phase" x="643" y="44">Gipfel</text>
-          <text x="643" y="66">Deine Zieltour</text>
-          <text x="40" y="236">Woche 1</text>
-          <text x="333" y="236" text-anchor="middle">Woche 5</text>
-          <text x="627" y="236" text-anchor="middle">Woche 9</text>
-          <text x="920" y="236" text-anchor="end">Woche 12</text>
-        </svg>
-      </div>
-
-      <div class="inside">
-        <div>
-          <h3>Wanderplan</h3>
-          <p>Für dein Niveau, Woche für Woche steigernd.</p>
-          <div class="levels"><span>Einsteiger</span><span>Aktiv</span><span>Sportlich</span></div>
-        </div>
-        <div>
-          <h3>Kraft zu Hause</h3>
-          <p>20 bis 40 Minuten, ohne Geräte. Macht dich stark für den Abstieg.</p>
-        </div>
-        <div>
-          <h3>Ernährung</h3>
-          <p>Ohne Verbote und ohne Kalorien zählen. Eine neue Gewohnheit pro Woche.</p>
-        </div>
-        <div>
-          <h3>Mindset</h3>
-          <p>Jeden Montag ein Impuls mit einer kurzen Übung gegen Stress.</p>
-        </div>
-        <div>
-          <h3>Check-in</h3>
-          <p>Jeden Sonntag eine kurze Nachricht an mich auf Instagram.</p>
-        </div>
-        <div>
-          <h3>Dein Tempo</h3>
-          <p>Du setzt den Plan selbst um. Ich gebe dir die Route und den Schubs.</p>
-        </div>
-      </div>
-
-      <div class="price">
-        <div>
-          <span class="eyebrow">Start Januar 2027</span>
-          <h3>Beta-Preis für die ersten 5</h3>
-          <p>Die ersten fünf Leute bekommen Zämä Berguf zum reduzierten Preis. Im Gegenzug wünsche ich mir ehrliches Feedback.</p>
-        </div>
-        <div class="amount">
-          <span class="now"><span>CHF 55</span> <small></small></span>
-          <span class="was"><span>statt</span> <s>CHF 99</s></span>
-        </div>
-        <div class="price-cta">
-          <a class="sign" href="https://www.instagram.com/wander._.dude/" target="_blank" rel="noopener"><span>Platz sichern</span> <small>auf Instagram</small></a>
-          <p>Schreib mir «Berguf» als Nachricht auf Instagram.</p>
-        </div>
-      </div>
-    </div>
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">⚙️ Recommended Setup for the Best Experience</h2>
+    <p style="margin:0 0 14px 0;">VoiceChanger works on ordinary Windows computers, but a few small habits make the experience noticeably smoother:</p>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Use headphones.</strong> Listening with headphones prevents your speakers from feeding sound back into the microphone, which can create an echo.</li>
+      <li style="margin-bottom:12px;"><strong>Keep other audio apps closed.</strong> Programs that also hold the microphone open can interfere with voice processing.</li>
+      <li style="margin-bottom:12px;"><strong>Start with a moderate effect level.</strong> A light effect often sounds more convincing than an extreme one.</li>
+      <li style="margin-bottom:12px;"><strong>Speak at a steady volume.</strong> Consistent distance from the microphone gives the cleanest results.</li>
+      <li style="margin-bottom:0;"><strong>Keep the app visible while learning.</strong> Having the controls on screen makes it easier to switch presets during your first sessions.</li>
+    </ul>
   </section>
 
-  <div class="wrap wide"><div class="strip">
-    <img src="bergsee.jpg" alt="Der Wanderdude steht an einem Bergsee und schaut auf einen verschneiten Gipfel">
-    <img src="abendrot.jpg" alt="Der Wanderdude mit Rucksack im Abendrot auf einem Gipfel">
-  </div></div>
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">💡 Tips for Natural Sounding Voice Changes</h2>
+    <p style="margin:0 0 14px 0;">A good voice change is about small adjustments rather than big ones. Try these habits:</p>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;">Change one setting at a time so you can tell what made the difference.</li>
+      <li style="margin-bottom:12px;">Use the preview before joining a call, not during it.</li>
+      <li style="margin-bottom:12px;">For character voices, adjust your speaking rhythm along with the preset — it makes the effect far more believable.</li>
+      <li style="margin-bottom:12px;">Save your favourite combinations so you can return to them instantly next time.</li>
+      <li style="margin-bottom:0;">Keep the background noise in your room low; a quiet room always produces a cleaner voice.</li>
+    </ul>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">🛠️ Troubleshooting Common Issues</h2>
+    <p style="margin:0 0 14px 0;">Most problems are quick to solve. Start with the simple checks below.</p>
+    <ul style="margin:0;padding-left:22px;">
+      <li style="margin-bottom:12px;"><strong>Nobody can hear the changed voice.</strong> Confirm that the correct microphone is selected inside both VoiceChanger and the app you are talking in.</li>
+      <li style="margin-bottom:12px;"><strong>The microphone level does not move.</strong> Check that Windows has allowed microphone access for the app, then re-select your microphone in the settings.</li>
+      <li style="margin-bottom:12px;"><strong>There is an echo or a loop.</strong> Switch to headphones and lower your speaker volume.</li>
+      <li style="margin-bottom:12px;"><strong>The voice sounds robotic or crackly.</strong> Reduce the effect strength and close other programs that use audio in the background.</li>
+      <li style="margin-bottom:12px;"><strong>The app feels slow.</strong> Close unused browser tabs and other heavy programs while it runs.</li>
+      <li style="margin-bottom:0;"><strong>Something still is not right.</strong> Close the app completely, open it again, and test with a short sentence in the preview window.</li>
+    </ul>
+  </section>
+
+  <section style="background:#ffffff;border-radius:16px;padding:32px 28px;margin:32px 0;box-shadow:0 6px 20px rgba(15,23,42,0.08);">
+    <h2 style="margin:0 0 16px 0;font-size:clamp(22px,3.4vw,28px);line-height:1.3;color:#111827;font-weight:700;">❓ Frequently Asked Questions</h2>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Do I need any technical knowledge to use VoiceChanger?</p>
+    <p style="margin:0 0 18px 0;">No. The app is designed for everyday Windows users, with clear buttons, sliders and ready-made voices. If you can open a program, you can use it.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Can I change my voice while a game is running?</p>
+    <p style="margin:0 0 18px 0;">Yes. VoiceChanger is built to process your voice live, so you can switch presets between matches or rounds without restarting anything.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Do I need a special microphone?</p>
+    <p style="margin:0 0 18px 0;">A standard USB or built-in microphone works. A quiet room and a consistent speaking distance matter more than the microphone itself.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">Can I use more than one effect at once?</p>
+    <p style="margin:0 0 18px 0;">You can combine a voice preset with soundboard clips and tone adjustments to build a sound that is uniquely yours.</p>
+    <p style="margin:0 0 6px 0;font-weight:700;color:#111827;">What should I do first after downloading?</p>
+    <p style="margin:0;">Open the app, allow microphone access, pick your microphone, and speak one short sentence in the preview. From there, choose a preset and adjust the sliders until the voice sounds right.</p>
+  </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <span class="mark">Wander<span>dude</span></span>
-      <span class="slogan">Zämä geitz berguf</span>
-    </div>
-    <p><a href="https://www.instagram.com/wander._.dude/" target="_blank" rel="noopener">Instagram @wander._.dude</a> · ben@wanderdude.ch</p>
-
-    <details id="impressum">
-      <summary>Impressum</summary>
-      <div class="legal">
-        <p class="lines">Wanderdude
-Benjamin Stucki
-3132 Riggisberg</p>
-        <p>E-Mail: ben@wanderdude.ch</p>
-        <p>Die Inhalte dieser Website ersetzen keine medizinische Beratung. Wer Vorerkrankungen, Schmerzen oder Unsicherheiten hat, spricht vor dem Training mit einer Ärztin oder einem Arzt.</p>
-      </div>
-    </details>
-
-    <details id="datenschutz">
-      <summary>Datenschutz</summary>
-      <div class="legal">
-        <p>Verantwortlich für die Bearbeitung deiner Daten ist Benjamin Stucki, Wanderdude, erreichbar unter ben@wanderdude.ch.</p>
-        <h4>Newsletter und Starterplan</h4>
-        <p>Wenn du den Starterplan anforderst, speichern wir deine E-Mail-Adresse, um dir den Plan und gelegentlich Mails vom Wanderdude zu schicken. Dafür nutzen wir Brevo (Sendinblue GmbH). Brevo speichert Daten in der EU. Du kannst dich in jeder Mail mit einem Klick abmelden. Danach löschen wir deine Adresse.</p>
-        <h4>Hosting</h4>
-        <p>Diese Website wird über GitHub Pages bereitgestellt (GitHub Inc., USA). Beim Aufruf verarbeitet GitHub technische Daten wie die IP-Adresse, um die Seite auszuliefern und den Betrieb zu sichern. Dabei können Daten in die USA übermittelt werden.</p>
-        <h4>Instagram</h4>
-        <p>Links zu Instagram führen auf die Plattform von Meta. Dort gelten die Datenschutzbestimmungen von Meta.</p>
-        <h4>Deine Rechte</h4>
-        <p>Du kannst jederzeit Auskunft über deine Daten verlangen, sie berichtigen oder löschen lassen. Schreib dafür an ben@wanderdude.ch.</p>
-        <p class="small">Stand: November 2026</p>
-      </div>
-    </details>
-    <p class="small">© 2026 Wanderdude · <a href="agb.html">AGB</a></p>
-  </div>
-</footer>
-<script>
-  window.REQUIRED_CODE_ERROR_MESSAGE = 'Wähle bitte eine Ländervorwahl aus.';
-  window.LOCALE = 'de';
-  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Diese E-Mail-Adresse stimmt nicht. Prüf sie bitte nochmals.";
-  window.REQUIRED_ERROR_MESSAGE = "Bitte trag deine E-Mail-Adresse ein.";
-  window.GENERIC_INVALID_MESSAGE = "Diese E-Mail-Adresse stimmt nicht. Prüf sie bitte nochmals.";
-  window.translation = { common: { selectedList: '{quantity} Liste ausgewählt', selectedLists: '{quantity} Listen ausgewählt', selectedOption: '{quantity} ausgewählt', selectedOptions: '{quantity} ausgewählt' } };
-  var AUTOHIDE = Boolean(0);
-</script>
-<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 </body>
 </html>
